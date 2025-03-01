@@ -1,0 +1,21 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "MSVC",
+	"compiler-id" : "MSVC",
+	"compiler-simulate-id" : "",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "C:/Users/User/Documents/13286530_IPA_A1/cmake-build-debug",
+	"dir-cur-src" : "C:/Users/User/Documents/13286530_IPA_A1",
+	"dir-top-bld" : "C:/Users/User/Documents/13286530_IPA_A1/cmake-build-debug",
+	"dir-top-src" : "C:/Users/User/Documents/13286530_IPA_A1",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"C:\\Program Files (x86)\\OpenCV\\include"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "C:/Users/User/Documents/13286530_IPA_A1/cmake-build-debug/CMakeFiles/13286530_IPA_A1.dir"
+}
