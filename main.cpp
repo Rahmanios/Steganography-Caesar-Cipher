@@ -2,9 +2,19 @@
 #include <iostream>
 #include <string>
 
+using namespace cv;
+using namespace std;
+
+string caesar_encrypt(const string text, int shift) {
+    string encrypted_text = text;
+}
+
+string caesar_decrypt(const string& text, int shift) {
+
+}
+
+
 int main() {
-    using namespace cv;
-    using namespace std;
     int choice;
     cout<<"Choose an Option:\n1. Encode a Text Into an Image\n2. Decode a Text From an Image\n";
     cin>>choice;
