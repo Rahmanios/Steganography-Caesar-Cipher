@@ -20,6 +20,25 @@ string caesar_decrypt(const string& text, int shift) {
     return caesar_encrypt(text,26 - shift);
 }
 
+bool encode_text_into_image(const string& image_path, const string& text, const string& output_path, int shiftvalue = 0) {
+    int Pixeloffset = 100;
+    // openig the image and checking if its exist
+    cv::Mat image = cv::imread(image_path, cv::IMREAD_COLOR);
+    if (image.empty()) {
+        cerr << "Could not open or find the image." << endl;
+        return false;
+    }
+    string processed_text = text;
+    if (shiftvalue != 0) {
+        processed_text = caesar_encrypt(text, shiftvalue);
+    }
+    //adding a unique symbol to the end of the text
+    processed_text += "%%%";
+
+
+}
+
+
 
 int main() {
     int choice;
