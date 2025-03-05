@@ -4,7 +4,7 @@
 
 using namespace cv;
 using namespace std;
-/*
+
 string caesar_encrypt(const string text, int shift) {
     string encrypted_text = text;
     for (char& c : encrypted_text) {
@@ -13,7 +13,7 @@ string caesar_encrypt(const string text, int shift) {
     }
 return encrypted_text;
 }
-
+/*
 string caesar_decrypt(const string& text, int shift) {
 
 }
@@ -35,7 +35,7 @@ int main() {
         cin>>shiftvalue;
         output_path =image_path.substr(0,image_path.find_last_of("."))+"_encoded.png";
         //calling the encode function in here.
-
+        cout<<(caesar_encrypt(text, shiftvalue));
     }else if(choice==2) {
         string image_path;
         int shiftvalue = 0;
