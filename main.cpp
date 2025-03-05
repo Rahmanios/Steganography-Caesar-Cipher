@@ -5,19 +5,21 @@
 using namespace cv;
 using namespace std;
 
-string caesar_encrypt(const string text, int shift) {
+string caesar_encrypt(const string& text, int shift) {
     string encrypted_text = text;
     for (char& c : encrypted_text) {
-        char base = islower(c) ? c - 32 : c;
-        c = base + shift;
+        if (isalpha(c)) {
+            char base = islower(c) ? 'a' : 'A';
+            c = base + (c - base + shift) % 26;
+        }
     }
 return encrypted_text;
 }
-/*
-string caesar_decrypt(const string& text, int shift) {
 
+string caesar_decrypt(const string& text, int shift) {
+    return caesar_encrypt(text,26 - shift);
 }
-*/
+
 
 int main() {
     int choice;
@@ -35,7 +37,9 @@ int main() {
         cin>>shiftvalue;
         output_path =image_path.substr(0,image_path.find_last_of("."))+"_encoded.png";
         //calling the encode function in here.
-        cout<<(caesar_encrypt(text, shiftvalue));
+        string encoded_text = (caesar_encrypt(text, shiftvalue));
+        cout<<"encrypted text is: "<<encoded_text<<"\n";
+        cout<<"decrypted text is: "<<caesar_decrypt(encoded_text, shiftvalue)<<"\n";
     }else if(choice==2) {
         string image_path;
         int shiftvalue = 0;
