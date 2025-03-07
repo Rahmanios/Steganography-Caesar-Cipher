@@ -1,3 +1,4 @@
+#include <bitset>
 #include <opencv2/opencv.hpp>
 #include <iostream>
 #include <string>
@@ -21,7 +22,7 @@ string caesar_decrypt(const string& text, int shift) {
 }
 
 bool encode_text_into_image(const string& image_path, const string& text, const string& output_path, int shiftvalue = 0) {
-    int Pixeloffset = 100;
+    int pixeloffset = 100;
     // openig the image and checking if its exist
     cv::Mat image = cv::imread(image_path, cv::IMREAD_COLOR);
     if (image.empty()) {
@@ -34,6 +35,26 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
     }
     //adding a unique symbol to the end of the text
     processed_text += "%%%";
+
+    //converting the processed_text into binary string
+    string binary_text;
+    for (char c : processed_text) {
+        binary_text += bitset<8>(c).to_string();
+    }
+
+    //Encoding section
+    int index = 0;
+    for (int i = pixeloffset; i < image.rows; ++i) {    //loop into rows
+        for (int j = 0; j < image.cols; ++j) {          //loop into cols
+            for (int k = 0; k < 3; ++k) {               //loop over BGR channels
+                if (index < binary_text.length()) {     //0xFF = 11111110
+                    image.at<cv::Vec3b>(i, j)[k] = (image.at<cv::Vec3b>(i, j)[k] >> shiftvalue) & 0xFF;
+                    index++;
+                }
+            }
+        }
+    }
+
 
 
 }
