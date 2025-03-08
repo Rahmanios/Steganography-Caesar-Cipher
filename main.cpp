@@ -29,6 +29,7 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
         cerr << "Could not open or find the image." << endl;
         return false;
     }
+    // Encrypt the input text using caesar cipher if shift value is entered
     string processed_text = text;
     if (shiftvalue != 0) {
         processed_text = caesar_encrypt(text, shiftvalue);
@@ -40,6 +41,12 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
     string binary_text;
     for (char c : processed_text) {
         binary_text += bitset<8>(c).to_string();
+    }
+    //checking if the image has enough pixels to be encoded
+    int total_pixels = image.rows * image.cols * 3; //considering BGR
+    if (binary_text.length() > total_pixels - pixeloffset * 3) {
+        cerr << "Image is too small to encode the text." << endl;
+        return false;
     }
 
     //Encoding section
@@ -68,8 +75,6 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
 
 }
 
-
-
 int main() {
     int choice;
     cout<<"Choose an Option:\n1. Encode a Text Into an Image\n2. Decode a Text From an Image\n";
@@ -77,16 +82,21 @@ int main() {
     if(choice==1) {
         string image_path, text, output_path;
         int shiftvalue = 0;
-        cout<<"Enter Image Path (PNG Only): ";
+        cout<<"Enter Image Path (PNG Only):  ";
         cin>>image_path;
+        //check if the image is PNG
+        if (image_path.substr(image_path.find_last_of(".") + 1) != "png") {
+            cerr<<"Error: Only PNG Images Are Allowed!\n";
+            return 1;
+        }
         cout<<"Enter a Text to Encode: ";
-        cin.ignore();
+        cin.ignore(); //clear the input buffer
         getline(cin, text);
         cout<<"Enter Shift Value (0 for no encryption): ";
         cin>>shiftvalue;
         //output path
         output_path =image_path.substr(0,image_path.find_last_of("."))+"_encoded.png";
-        //calling the encode function in here.
+        //testing the encode function.
         string encoded_text = (caesar_encrypt(text, shiftvalue));
         cout<<"encrypted text is: "<<encoded_text<<"\n";
         cout<<"decrypted text is: "<<caesar_decrypt(encoded_text, shiftvalue)<<"\n";
