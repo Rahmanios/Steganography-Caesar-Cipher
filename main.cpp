@@ -14,11 +14,11 @@ string caesar_encrypt(const string& text, int shift) {
             c = base + (c - base + shift) % 26;
         }
     }
-return encrypted_text;
+    return encrypted_text;
 }
 
 string caesar_decrypt(const string& text, int shift) {
-    return caesar_encrypt(text,26 - shift);
+    return caesar_encrypt(text,26 - shift); //just shifting back
 }
 
 bool encode_text_into_image(const string& image_path, const string& text, const string& output_path, int shiftvalue = 0) {
@@ -74,6 +74,18 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
     return true;
 
 }
+
+string decode_text_from_image(const string& image_path, int shiftvalue = 0) {
+    int pixeloffset = 100;
+    //loading the encoded image
+    cv::Mat image = cv::imread(image_path, cv::IMREAD_COLOR);
+    if (image.empty()) {
+        cerr << "Could not open or load the image." << endl;
+        return "";
+    }
+
+}
+
 
 int main() {
     int choice;
