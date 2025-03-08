@@ -46,16 +46,25 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
     int index = 0;
     for (int i = pixeloffset; i < image.rows; ++i) {    //loop into rows
         for (int j = 0; j < image.cols; ++j) {          //loop into cols
-            for (int k = 0; k < 3; ++k) {               //loop over BGR channels
-                if (index < binary_text.length()) {     //0xFF = 11111110
+            for (int k = 0; k < 3; ++k) {               //loop over BGR channels 0=blue 1=green 2=red
+                if (index < binary_text.length()) {     //0xFF = 11111110, Vec3b => 3byte -> 3*8 bit
                     image.at<cv::Vec3b>(i, j)[k] = (image.at<cv::Vec3b>(i, j)[k] >> shiftvalue) & 0xFF;
                     index++;
+                }else {
+                    break;
                 }
             }
+            if (index >= binary_text.length()) break;
         }
+        if (index >= binary_text.length()) break;
     }
-
-
+    //saving the image
+    if (!cv::imwrite(output_path, image)) {
+        cerr << "Could not open or find the image." << endl;
+        return false;
+    }
+    cout << "Image encoded successfully into: " << output_path << endl;
+    return true;
 
 }
 
@@ -75,11 +84,15 @@ int main() {
         getline(cin, text);
         cout<<"Enter Shift Value (0 for no encryption): ";
         cin>>shiftvalue;
+        //output path
         output_path =image_path.substr(0,image_path.find_last_of("."))+"_encoded.png";
         //calling the encode function in here.
         string encoded_text = (caesar_encrypt(text, shiftvalue));
         cout<<"encrypted text is: "<<encoded_text<<"\n";
         cout<<"decrypted text is: "<<caesar_decrypt(encoded_text, shiftvalue)<<"\n";
+        if (!encode_text_into_image(image_path, text, output_path, shiftvalue)) {
+            return -1;
+        }
     }else if(choice==2) {
         string image_path;
         int shiftvalue = 0;
