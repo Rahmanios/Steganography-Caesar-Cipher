@@ -22,7 +22,7 @@ string caesar_decrypt(const string& text, int shift) {
 }
 
 bool encode_text_into_image(const string& image_path, const string& text, const string& output_path, int shiftvalue = 0) {
-    int pixeloffset = 100;
+    int pixel_offset = 100;
     // openig the image and checking if its exist
     cv::Mat image = cv::imread(image_path, cv::IMREAD_COLOR);
     if (image.empty()) {
@@ -44,14 +44,14 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
     }
     //checking if the image has enough pixels to be encoded
     int total_pixels = image.rows * image.cols * 3; //considering BGR
-    if (binary_text.length() > total_pixels - pixeloffset * 3) {
+    if (binary_text.length() > total_pixels - pixel_offset * 3) {
         cerr << "Image is too small to encode the text." << endl;
         return false;
     }
 
     //Encoding section
     int index = 0;
-    for (int i = pixeloffset; i < image.rows; ++i) {    //loop into rows
+    for (int i = pixel_offset; i < image.rows; ++i) {    //loop into rows
         for (int j = 0; j < image.cols; ++j) {          //loop into cols
             for (int k = 0; k < 3; ++k) {               //loop over BGR channels 0=blue 1=green 2=red
                 if (index < binary_text.length()) {     //0xFF = 11111110, Vec3b => 3byte -> 3*8 bit
@@ -76,7 +76,7 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
 }
 
 string decode_text_from_image(const string& image_path, int shiftvalue = 0) {
-    int pixeloffset = 100;
+    int pixel_offset = 100;
     //loading the encoded image
     cv::Mat image = cv::imread(image_path, cv::IMREAD_COLOR);
     if (image.empty()) {
@@ -84,6 +84,23 @@ string decode_text_from_image(const string& image_path, int shiftvalue = 0) {
         return "";
     }
 
+    string binary_text ;
+    bool end_symbol = false;
+    //extracting the binary text from image
+    for (int i=pixel_offset; i<image.rows; ++i) {
+        for (int j = 0; j < image.cols; ++j) {
+            for (int k=0; k<3; ++k) {
+                char bit = (image.at<cv::Vec3b>(i, j)[k] & 1) + '0';
+                binary_text += bit;
+
+                cout<<"binary_text is --->> "<<binary_text;
+
+
+
+
+            }
+        }
+    }
 }
 
 
@@ -122,6 +139,7 @@ int main() {
         cin>>image_path;
         cout<<"Was The Text Encrypted Using CIPHER ? (Enter Shift Value): ";
         cin>>shiftvalue;
+        cout<<decode_text_from_image(image_path, shiftvalue);
     }else {
         cerr<<"Error: Invalid Choice.\n";
         return -1;
