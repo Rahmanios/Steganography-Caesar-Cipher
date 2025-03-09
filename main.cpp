@@ -1,6 +1,7 @@
 #include <bitset>
 #include <opencv2/opencv.hpp>
 #include <iostream>
+#include <iso646.h>
 #include <string>
 
 using namespace cv;
@@ -93,14 +94,34 @@ string decode_text_from_image(const string& image_path, int shiftvalue = 0) {
                 char bit = (image.at<cv::Vec3b>(i, j)[k] & 1) + '0';
                 binary_text += bit;
 
-                cout<<"binary_text is --->> "<<binary_text;
-
-
-
-
+                //cout<<"binary_text is --->> "<<binary_text;
+                //finding the ending symbol we used before %%%
+                if (binary_text.length() % 8 == 0) {
+                    string byte = binary_text.substr(binary_text.length() - 8, 8) ;//extracting the last 8 bits
+                    //char c = static_cast<char>(bitset<8>(byte).to_ullong()) ;
+                    char c = static_cast<char>(bitset<8>(byte).to_ulong()) ;//converting the 8bit into character
+                    if (c == '%' && binary_text.length() >= 24) {
+                        //checking for the last 3 character is %%%
+                        string last_3_byte;
+                        for (int l = 1; l<= 3; ++l) {
+                            //extracting the last byte if l=1, l=2 or 3 second or third from last
+                            byte = binary_text.substr(binary_text.length() - 8 * l,8) ;
+                            //last_3_byte = static_cast<byte>(bitset<8>.to_ulong());
+                            last_3_byte = static_cast<char>(bitset<8>(byte).to_ulong()) + last_3_byte;
+                        }
+                        if (last_3_byte == "%%%") {
+                            end_symbol = true;
+                            break;
+                        }
+                    }
+                }
             }
+            if (end_symbol) break;
         }
+        if (end_symbol) break;
     }
+    //return binary_text;
+
 }
 
 
