@@ -52,12 +52,12 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
 
     //Encoding section
     int index = 0;
-    /*
+
     for (int i = pixel_offset; i < image.rows; ++i) {    //loop into rows
         for (int j = 0; j < image.cols; ++j) {          //loop into cols
             for (int k = 0; k < 3; ++k) {               //loop over BGR channels 0=blue 1=green 2=red
                 if (index < binary_text.length()) {     //0xFF = 11111110, Vec3b => 3byte -> 3*8 bit
-                    image.at<cv::Vec3b>(i, j)[k] = (image.at<cv::Vec3b>(i, j)[k] >> shiftvalue) & 0xFF;
+                    image.at<cv::Vec3b>(i, j)[k] = (image.at<cv::Vec3b>(i, j)[k] & 0xFF) | (binary_text[index] - '0') ;
                     index++;
                 }else {
                     break;
@@ -67,7 +67,8 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
         }
         if (index >= binary_text.length()) break;
     }
-    */
+
+    /*
     for (int i = pixel_offset; i < image.rows ; ++i) {
         for (int j = 0; j < image.cols ; ++j) {
             if (index < binary_text.length()) {
@@ -83,17 +84,16 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
         }
         if (index >= binary_text.length()) break;
     }
-
+    */
 
     //saving the image
     if (!cv::imwrite(output_path, image)) {
-        cerr << "Could not open or find the image." << endl;
+        cerr << "Could not save the encoded image." << endl;
         return false;
     }
     cout << endl ;
     cout << "Image encoded successfully into: " << output_path << endl;
     return true;
-
 }
 
 string decode_text_from_image(const string& image_path, int shiftvalue = 0) {
@@ -109,8 +109,10 @@ string decode_text_from_image(const string& image_path, int shiftvalue = 0) {
     bool end_symbol = false;
     //extracting the binary text from image with LSB method
     for (int i=pixel_offset; i<image.rows; ++i) {
+        cout<<"i= " << i;
         for (int j = 0; j < image.cols; ++j) {
-            for (int k=0; k<3; ++k) {
+            cout<< "j= " << j;
+            for (int k = 0 ; k < 3 ; ++k ) {
                 char bit = (image.at<cv::Vec3b>(i, j)[k] & 1) + '0';
                 binary_text += bit;
 
@@ -140,8 +142,25 @@ string decode_text_from_image(const string& image_path, int shiftvalue = 0) {
         }
         if (end_symbol) break;
     }
-    //return binary_text;
+    //Removing the end_symbol
+    binary_text = binary_text.substr(0, binary_text.length() - 24 );
 
+    //converting binary_text to string
+    string decoded_text ;
+    // size_t for getting the size of object in memory
+    for (size_t i = 0 ; i < binary_text.length(); i += 8) {
+        string byte = binary_text.substr(i, 8) ;
+        char c = static_cast<char>(bitset<8>(byte).to_ulong()) ;
+        decoded_text += c;
+    }
+
+    // decrypt the encoded_text if there is a shift value
+    if (shiftvalue != 0) {
+        decoded_text = caesar_decrypt(decoded_text, shiftvalue);
+    }
+
+
+    return decoded_text ;
 }
 
 
@@ -149,11 +168,14 @@ int main() {
     int choice;
     cout<<"Choose an Option:\n1. Encode a Text Into an Image\n2. Decode a Text From an Image\n";
     cin>>choice;
+
     if(choice==1) {
         string image_path, text, output_path;
         int shiftvalue = 0;
+
         cout<<"Enter Image Path (PNG Only):  ";
         cin>>image_path;
+
         //check if the image is PNG
         if (image_path.substr(image_path.find_last_of(".") + 1) != "png") {
             cerr<<"Error: Only PNG Images Are Allowed!\n";
@@ -162,25 +184,38 @@ int main() {
         cout<<"Enter a Text to Encode: ";
         cin.ignore(); //clear the input buffer
         getline(cin, text);
+
         cout<<"Enter Shift Value (0 for no encryption): ";
         cin>>shiftvalue;
+
         //output path
         output_path =image_path.substr(0,image_path.find_last_of("."))+"_encoded.png";
+
         //testing the encode function.
         string encoded_text = (caesar_encrypt(text, shiftvalue));
         cout<<"encrypted text is: "<<encoded_text<<"\n";
         cout<<"decrypted text is: "<<caesar_decrypt(encoded_text, shiftvalue)<<"\n";
+
         if (!encode_text_into_image(image_path, text, output_path, shiftvalue)) {
             return -1;
         }
     }else if(choice==2) {
         string image_path;
         int shiftvalue = 0;
+
         cout<<"Enter The Encoded Image Path: ";
         cin>>image_path;
+
         cout<<"Was The Text Encrypted Using CIPHER ? (Enter Shift Value): ";
         cin>>shiftvalue;
-        cout<<decode_text_from_image(image_path, shiftvalue);
+
+        //cout<<decode_text_from_image(image_path, shiftvalue);
+        string decoded_text = decode_text_from_image(image_path, shiftvalue);
+        if (!decoded_text.empty()) {
+            cout << "Decoded text is: " << decoded_text << endl;
+        }else {
+            cerr<<"Error: Image Decode Failed!\n";
+        }
     }else {
         cerr<<"Error: Invalid Choice.\n";
         return -1;
