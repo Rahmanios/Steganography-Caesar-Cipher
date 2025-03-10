@@ -52,6 +52,7 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
 
     //Encoding section
     int index = 0;
+    /*
     for (int i = pixel_offset; i < image.rows; ++i) {    //loop into rows
         for (int j = 0; j < image.cols; ++j) {          //loop into cols
             for (int k = 0; k < 3; ++k) {               //loop over BGR channels 0=blue 1=green 2=red
@@ -66,11 +67,30 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
         }
         if (index >= binary_text.length()) break;
     }
+    */
+    for (int i = pixel_offset; i < image.rows ; ++i) {
+        for (int j = 0; j < image.cols ; ++j) {
+            if (index < binary_text.length()) {
+                int channel = j % 3 ;
+                cout << channel ;
+                int col = j / 3 ;
+                image.at<cv::Vec3b>(i, col)[channel] = (image.at<cv::Vec3b>(i, col)[channel] >> shiftvalue) & 0xFF;
+                index ++ ;
+
+            }else {
+                break;
+            }
+        }
+        if (index >= binary_text.length()) break;
+    }
+
+
     //saving the image
     if (!cv::imwrite(output_path, image)) {
         cerr << "Could not open or find the image." << endl;
         return false;
     }
+    cout << endl ;
     cout << "Image encoded successfully into: " << output_path << endl;
     return true;
 
@@ -87,7 +107,7 @@ string decode_text_from_image(const string& image_path, int shiftvalue = 0) {
 
     string binary_text ;
     bool end_symbol = false;
-    //extracting the binary text from image
+    //extracting the binary text from image with LSB method
     for (int i=pixel_offset; i<image.rows; ++i) {
         for (int j = 0; j < image.cols; ++j) {
             for (int k=0; k<3; ++k) {
