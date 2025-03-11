@@ -54,11 +54,12 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
 
     //Encoding section
     int index = 0;
-    for (int i = pixel_offset; i < image.rows; ++i) {    //loop into rows
-        for (int j = 0; j < image.cols; ++j) {          //loop into cols
-            for (int k = 0; k < 3; ++k) {               //loop over BGR channels 0=blue 1=green 2=red
-                if (index < binary_text.length()) {     //0xFF = 11111110, Vec3b => 3byte -> 3*8 bit
-                    image.at<cv::Vec3b>(i, j)[k] = (image.at<cv::Vec3b>(i, j)[k] & 0xFF) | (binary_text[index] - '0') ;
+    for (int i = pixel_offset; i < image.rows; ++i) {        //loop into rows
+        for (int j = 0; j < image.cols; ++j) {              //loop into cols
+            for (int k = 0; k < 3; ++k) {                   //loop over BGR channels 0=blue 1=green 2=red
+                if (index < binary_text.length()) {         //0xFF = 11111110, Vec3b => 3byte -> 3*8 bit
+                    // Modify the LSB of the pixel
+                    image.at<cv::Vec3b>(i, j)[k] = (image.at<cv::Vec3b>(i, j)[k] & 0xFE) | (binary_text[index] - '0');
                     index++;
                 } else {
                     break;
@@ -67,7 +68,6 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
             if (index >= binary_text.length()) break;
         }
         if (index >= binary_text.length()) break;
-        //std::cout<<i << j << k << std::endl;
     }
     std::cout << "binary_text.length() -> " << binary_text.length() << std::endl;
     std::cout << "procesed_text.length() -> " << processed_text.length() << std::endl;
