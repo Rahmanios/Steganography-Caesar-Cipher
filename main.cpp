@@ -54,7 +54,7 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
 
     //Encoding section
     int index = 0;
-    for (int i = pixel_offset; i < image.rows; ++i) {        //loop into rows
+    for (int i = pixel_offset; i < image.rows; ++i) {        //loop into rows start from offset
         for (int j = 0; j < image.cols; ++j) {              //loop into cols
             for (int k = 0; k < 3; ++k) {                   //loop over BGR channels 0=blue 1=green 2=red
                 if (index < binary_text.length()) {         //0xFF = 11111110, Vec3b => 3byte -> 3*8 bit
