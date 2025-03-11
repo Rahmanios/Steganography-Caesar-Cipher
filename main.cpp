@@ -1,7 +1,7 @@
 #include <bitset>
 #include <opencv2/opencv.hpp>
 #include <iostream>
-#include <iso646.h>
+#include <vector>
 #include <string>
 
 using namespace cv;
@@ -22,8 +22,7 @@ string caesar_decrypt(const string& text, int shift) {
     return caesar_encrypt(text,26 - shift); //just shifting back
 }
 
-bool encode_text_into_image(const string& image_path, const string& text, const string& output_path, int shiftvalue = 0) {
-    int pixel_offset = 100;
+bool encode_text_into_image(const string& image_path, const string& text, const string& output_path,int pixel_offset = 100, int shiftvalue = 0) {
     // openig the image and checking if its exist
     cv::Mat image = cv::imread(image_path, cv::IMREAD_COLOR);
     if (image.empty()) {
@@ -37,7 +36,7 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
     }
     //adding a unique symbol to the end of the text
     processed_text += "%%%";
-
+    cout << "processed_text -> " << processed_text << endl;
     //converting the processed_text into binary string
     string binary_text;
     for (char c : processed_text) {
@@ -96,8 +95,7 @@ bool encode_text_into_image(const string& image_path, const string& text, const 
     return true;
 }
 
-string decode_text_from_image(const string& image_path, int shiftvalue = 0) {
-    int pixel_offset = 100;
+string decode_text_from_image(const string& image_path, int pixel_offset = 100, int shiftvalue = 0) {
     //loading the encoded image
     cv::Mat image = cv::imread(image_path, cv::IMREAD_COLOR);
     if (image.empty()) {
@@ -105,13 +103,11 @@ string decode_text_from_image(const string& image_path, int shiftvalue = 0) {
         return "";
     }
 
-    string binary_text ;
+    std::string binary_text ;
     bool end_symbol = false;
     //extracting the binary text from image with LSB method
     for (int i=pixel_offset; i<image.rows; ++i) {
-        cout<<"i= " << i;
         for (int j = 0; j < image.cols; ++j) {
-            cout<< "j= " << j;
             for (int k = 0 ; k < 3 ; ++k ) {
                 char bit = (image.at<cv::Vec3b>(i, j)[k] & 1) + '0';
                 binary_text += bit;
@@ -121,7 +117,8 @@ string decode_text_from_image(const string& image_path, int shiftvalue = 0) {
                 if (binary_text.length() % 8 == 0) {
                     string byte = binary_text.substr(binary_text.length() - 8, 8) ;//extracting the last 8 bits
                     //char c = static_cast<char>(bitset<8>(byte).to_ullong()) ;
-                    char c = static_cast<char>(bitset<8>(byte).to_ulong()) ;//converting the 8bit into character
+                    char c = static_cast<char>(std::bitset<8>(byte).to_ulong()) ;//converting the 8bit into character
+                    cout << "char c -> " << c << endl;
                     if (c == '%' && binary_text.length() >= 24) {
                         //checking for the last 3 character is %%%
                         string last_3_byte;
@@ -129,7 +126,9 @@ string decode_text_from_image(const string& image_path, int shiftvalue = 0) {
                             //extracting the last byte if l=1, l=2 or 3 second or third from last
                             byte = binary_text.substr(binary_text.length() - 8 * l,8) ;
                             //last_3_byte = static_cast<byte>(bitset<8>.to_ulong());
-                            last_3_byte = static_cast<char>(bitset<8>(byte).to_ulong()) + last_3_byte;
+                            last_3_byte = static_cast<char>(std::bitset<8>(byte).to_ulong()) + last_3_byte;
+                            cout << "last_3_byte -> " << last_3_byte <<endl;
+                            cout << "byte -> " << byte <<endl;
                         }
                         if (last_3_byte == "%%%") {
                             end_symbol = true;
@@ -196,7 +195,7 @@ int main() {
         cout<<"encrypted text is: "<<encoded_text<<"\n";
         cout<<"decrypted text is: "<<caesar_decrypt(encoded_text, shiftvalue)<<"\n";
 
-        if (!encode_text_into_image(image_path, text, output_path, shiftvalue)) {
+        if (!encode_text_into_image(image_path, text, output_path, 100 , shiftvalue)) {
             return -1;
         }
     }else if(choice==2) {
@@ -210,7 +209,7 @@ int main() {
         cin>>shiftvalue;
 
         //cout<<decode_text_from_image(image_path, shiftvalue);
-        string decoded_text = decode_text_from_image(image_path, shiftvalue);
+        string decoded_text = decode_text_from_image(image_path, 100, shiftvalue);
         if (!decoded_text.empty()) {
             cout << "Decoded text is: " << decoded_text << endl;
         }else {
