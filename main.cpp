@@ -10,6 +10,22 @@
 //using namespace cv;
 //using namespace std;
 
+/**
+ *
+ * Variables
+ * ---------
+ * choice : integer
+ * -the menu choice number 1 for encrypt and 2 for decrypt.
+ * image_path : string
+ * -The image path for encrypting
+ * text : string
+ * -the text to be encrypted into the image
+ * output_path : string
+ * -the path for saving the encrypted image + the suffix of _encoded
+ * decoded_text : string
+ * -the decoded string to be returned from decode_text_from_image function and to be shown to the user
+ * @return saves the encoded image
+ */
 int main() {
     int choice;
     std::cout<<"Choose an Option:\n1. Encode a Text Into an Image\n2. Decode a Text From an Image\n";
@@ -74,8 +90,6 @@ int main() {
         std::cerr<<"Error: Invalid Choice.\n";
         return -1;
     }
-
-
     return 0;
 }
 
