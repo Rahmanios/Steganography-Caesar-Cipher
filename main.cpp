@@ -1,3 +1,20 @@
+/**
+*@file main.cpp
+*@brief main program for encoding and decoding text into/from images using LSB steganography
+*and Caesar Cipher encryption
+*
+*@usage : This program allows user to:
+*1-encode a text into an image using the Least significant bit (LSB) method
+*2-decode a text from an image that was previously encoded using the LSB method
+*3-Optionally encrypt or decrypy the text with caesar cipher
+*
+*@headerfile caesar_cipher.h : for encrypting and decrypting the text using caesar cipher
+*@headerfile image_encoder.h : for encoding the text into the image
+*@headerfile image_decoder.h : for decoding the text from the image
+*
+*/
+
+
 #include <bitset>
 #include <opencv2/opencv.hpp>
 #include <iostream>
@@ -11,7 +28,7 @@
 //using namespace std;
 
 /**
- *
+ *main menu for the program
  * Variables
  * ---------
  * choice : integer
