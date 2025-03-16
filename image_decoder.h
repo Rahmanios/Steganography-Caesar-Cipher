@@ -1,6 +1,9 @@
-//
-// Created by User on 11/03/2025.
-//
+/**
+*@file image_decoder.h
+*@brief functions for decoding text into an image using the LSB method
+*this file contains decode_text_from_image function, which extracts text from an image that was previously encoded
+*using the LSB method.
+*/
 #ifndef IMAGE_DECODER_H
 #define IMAGE_DECODER_H
 #include <opencv2/opencv.hpp>
@@ -10,11 +13,11 @@
 
 
 /**
- *
- * @param image_path
- * @param pixel_offset
- * @param shiftvalue
- * @return
+ *@brief decodes the text from an image using the LSB method
+ * @param image_path path to the encoded image file
+ * @param pixel_offset the number of pixels to be skipped before starting the encoding (100)
+ * @param shiftvalue the shift value for the caesar cipher decryption
+ * @return decoded_text
  */
 
 std::string decode_text_from_image(const std::string& image_path, int pixel_offset = 100, int shiftvalue = 0) {
@@ -95,3 +98,6 @@ std::string decode_text_from_image(const std::string& image_path, int pixel_offs
 
 
 #endif //IMAGE_DECODER_H
+//
+// Created by User on 11/03/2025.
+//

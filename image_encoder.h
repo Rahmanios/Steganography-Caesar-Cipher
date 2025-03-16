@@ -1,6 +1,10 @@
-//
-// Created by User on 11/03/2025.
-//
+/**
+*@file image_encoder.h
+*@brief functions for encoding text into an image using the LSB method
+* This file contains the encode_text_into_image function, which encodes a given text into an image
+* by modifying the LSB of each pixel's color channels
+* the text can be encrypted if the shift value is provided and not zero
+*/
 #ifndef IMAGE_ENCODER_H
 #define IMAGE_ENCODER_H
 #include <opencv2/opencv.hpp>
@@ -8,16 +12,18 @@
 #include <bitset>
 #include "caesar_cipher.h"
 
-
 /**
- * 
- * @param image_path 
- * @param text 
- * @param output_path 
- * @param pixel_offset 
- * @param shiftvalue 
- * @return 
+ * @brief Encoding the text into an image using the LSB method.
+ * This function takes an input image, encodes the provided text into the image by modifying the LSB of each pixel's
+ * color channels. and then saves the encoded image into a new file.
+ * @param image_path path to the input image file which it must be only a png file
+ * @param text the text to be encoded into the image
+ * @param output_path path to save the encoded image file
+ * @param pixel_offset the number of pixels to be escaped befor start encoding (100)
+ * @param shiftvalue the shift value for caesar cipher encryption (0 for no encryption)
+ * @return true if the encoding is successful, otherwise it returns false
  */
+
 bool encode_text_into_image(const std::string& image_path, const std::string& text, const std::string& output_path,int pixel_offset = 100, int shiftvalue = 0) {
     // opening the image and checking if its exist
     cv::Mat image = cv::imread("../" + image_path, cv::IMREAD_COLOR);
@@ -99,3 +105,7 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
 }
 
 #endif //IMAGE_ENCODER_H
+
+//
+// Created by User on 11/03/2025.
+//

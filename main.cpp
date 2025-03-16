@@ -13,8 +13,6 @@
 *@headerfile image_decoder.h : for decoding the text from the image
 *
 */
-
-
 #include <bitset>
 #include <opencv2/opencv.hpp>
 #include <iostream>

@@ -2,8 +2,8 @@
 // Created by User on 11/03/2025.
 //
 /**
-* @file caesar_cipher.h
-* @ functions for encrypt and decrypy the text using Caesar Cipher method.
+*@file caesar_cipher.h
+*@brief functions for encrypt and decrypy the text using Caesar Cipher method.
 * This file contains two functions:
 * - caesar_encrypt: encrypt the text using caesar cipher
 * - caesar_decrypt: decrypt the text using caesar cipher
@@ -17,7 +17,7 @@
 #include <gtest/gtest.h>
 
 /**
- * This function shifts each alphabetic character in the input text by the value of shift value
+ *@brief This function shifts each alphabetic character in the input text by the value of shift value
  * @param text the text to encrypt
  * @param shift The number of shifting value for each character
  * @return The encrypted text
@@ -34,7 +34,7 @@ std::string caesar_encrypt(const std::string& text, int shift) {
 }
 
 /**
- * This function reverse the Caesar cipher encryption by shifting each character to the original position
+ *@brief This function reverse the Caesar cipher encryption by shifting each character to the original position
  * @param text the text to decrypt
  * @param shift The number of positions to shift each character
  * @return the decrypt text
