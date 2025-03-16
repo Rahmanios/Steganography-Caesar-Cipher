@@ -10,7 +10,7 @@
 
 std::string decode_text_from_image(const std::string& image_path, int pixel_offset = 100, int shiftvalue = 0) {
     //loading the encoded image
-    cv::Mat image = cv::imread(image_path, cv::IMREAD_COLOR);
+    cv::Mat image = cv::imread("../" + image_path, cv::IMREAD_COLOR);
     if (image.empty()) {
         std::cerr << "Could not open or load the image." << std::endl;
         return "";

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.29.6)
 project(13286530_IPA_A1)
 
 find_package( OpenCV REQUIRED )

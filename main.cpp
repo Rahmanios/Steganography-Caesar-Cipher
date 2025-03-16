@@ -9,6 +9,7 @@
 
 //using namespace cv;
 //using namespace std;
+
 int main() {
     int choice;
     std::cout<<"Choose an Option:\n1. Encode a Text Into an Image\n2. Decode a Text From an Image\n";
@@ -16,7 +17,7 @@ int main() {
 
     if(choice==1) {
         std::string image_path, text, output_path;
-        int shiftvalue = 0;
+        int shiftvalue = 0 ;
 
         std::cout<<"Enter Image Path (PNG Only):  ";
         std::cin>>image_path;
@@ -30,20 +31,28 @@ int main() {
         std::cin.ignore(); //clear the input buffer
         std::getline(std::cin, text);
 
-        std::cout<<"Enter Shift Value (0 for no encryption): ";
+        std::cout<<"Enter Shift Value 0 to 20. (0 for no encryption): ";
         std::cin>>shiftvalue;
 
+        if( shiftvalue >= 0 && shiftvalue <= 20) {
+            output_path =image_path.substr(0,image_path.find_last_of(".")) + "_encoded.png";
+            if (!encode_text_into_image(image_path, text, "../" + output_path, 100 , shiftvalue)) {
+                return -1;
+            }
+        }else {
+            std::cout<<"The shift value must be a number between 0 to 20";
+        }
         //output path
-        output_path =image_path.substr(0,image_path.find_last_of(".")) + "_encoded.png";
+        //output_path =image_path.substr(0,image_path.find_last_of(".")) + "_encoded.png";
 
         //testing the encode function.
         //std::string encoded_text = (caesar_encrypt(text, shiftvalue));
         //std::cout<<"encrypted text is: "<<encoded_text<<"\n";
         //std::cout<<"decrypted text is: "<<caesar_decrypt(encoded_text, shiftvalue)<<"\n";
 
-        if (!encode_text_into_image(image_path, text, output_path, 100 , shiftvalue)) {
-            return -1;
-        }
+        //if (!encode_text_into_image(image_path, text, "../" + output_path, 100 , shiftvalue)) {
+        //    return -1;
+        //}
     }else if(choice==2) {
         std::string image_path;
         int shiftvalue = 0;

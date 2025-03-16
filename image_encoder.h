@@ -9,8 +9,8 @@
 #include "caesar_cipher.h"
 
 bool encode_text_into_image(const std::string& image_path, const std::string& text, const std::string& output_path,int pixel_offset = 100, int shiftvalue = 0) {
-    // openig the image and checking if its exist
-    cv::Mat image = cv::imread(image_path, cv::IMREAD_COLOR);
+    // opening the image and checking if its exist
+    cv::Mat image = cv::imread("../" + image_path, cv::IMREAD_COLOR);
     if (image.empty()) {
         std::cerr << "Could not open or find the image." << std::endl;
         return false;
