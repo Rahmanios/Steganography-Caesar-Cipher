@@ -18,6 +18,10 @@
  * @param pixel_offset the number of pixels to be skipped before starting the encoding (100)
  * @param shiftvalue the shift value for the caesar cipher decryption
  * @return decoded_text
+ * variables
+ *-----------
+ *
+ *
  */
 
 std::string decode_text_from_image(const std::string& image_path, int pixel_offset = 100, int shiftvalue = 0) {

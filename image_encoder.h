@@ -22,6 +22,8 @@
  * @param pixel_offset the number of pixels to be escaped befor start encoding (100)
  * @param shiftvalue the shift value for caesar cipher encryption (0 for no encryption)
  * @return true if the encoding is successful, otherwise it returns false
+ * variables
+ * ----------
  */
 
 bool encode_text_into_image(const std::string& image_path, const std::string& text, const std::string& output_path,int pixel_offset = 100, int shiftvalue = 0) {
