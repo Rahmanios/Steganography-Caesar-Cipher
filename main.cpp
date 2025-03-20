@@ -62,6 +62,7 @@ int main() {
         std::cin.ignore(); //clear the input buffer
         std::getline(std::cin, text);
 
+
         std::cout<<"Enter Shift Value 0 to 20. (0 for no encryption): ";
         std::cin>>shiftvalue;
 
