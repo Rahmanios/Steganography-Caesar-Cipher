@@ -1,12 +1,15 @@
 #include <gtest/gtest.h>
-#include "caesar_cipher.h"
+#include "../caesar_cipher.h"
 using namespace std;
 
 // testing if it encrypts and if the shift value is right
 TEST(caesar_test, encrypt_text) {
+    // Arrange
     string text = "Hello, World";
     int shift = 5;
+    // Act
     string encrypted_text = caesar_encrypt(text, shift);
+    // Assert
     EXPECT_EQ(encrypted_text, "Mjqqt, Btwqi");
 }
 
@@ -18,11 +21,13 @@ TEST(caesar_test, decrypt_text) {
     EXPECT_EQ(decrypted_text, "Hello, World");
 }
 
+int main() {
+    testing::InitGoogleTest();
+    return RUN_ALL_TESTS();
 
+}
 
-
-
-
+//testing::Test::
 
 
 
