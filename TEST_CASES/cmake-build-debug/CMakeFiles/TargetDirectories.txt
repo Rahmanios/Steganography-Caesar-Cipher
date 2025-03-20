@@ -1,0 +1,3 @@
+/home/kali/Documents/13286530_IPA_A1/TEST_CASES/cmake-build-debug/CMakeFiles/13286530_IPA_A1.dir
+/home/kali/Documents/13286530_IPA_A1/TEST_CASES/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/kali/Documents/13286530_IPA_A1/TEST_CASES/cmake-build-debug/CMakeFiles/rebuild_cache.dir
