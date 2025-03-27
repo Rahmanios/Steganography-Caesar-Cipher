@@ -3,6 +3,8 @@
 #include "../image_encoder.h"
 #include <opencv2/opencv.hpp>
 
+#include "../image_decoder.h"
+
 using namespace std;
 using namespace cv;
     // CAESAR ENCODE DECODE TESTS
@@ -72,6 +74,36 @@ TEST(image_encoder_test, encode_shifted_text) {
     EXPECT_TRUE(result);
 }
     // /ENCODING TESTS
+    // DECODING TESTS
+//decoding a text with no shift
+TEST(image_decoder_test, decode_text_from_image) {
+    string image_path = "boat.png";
+    string text = "Hello World" ;
+    string output_path = "test_image_encode.png" ;
+    int shift = 0;
+
+    bool encode_result = encode_text_into_image(image_path, text, output_path, 100, shift);
+    ASSERT_TRUE(encode_result);
+
+    string decoded_text = decode_text_from_image(output_path, 100, shift);
+    EXPECT_EQ(decoded_text, text);
+}
+
+//decoding a text with shift value
+TEST(image_decoder_test, decode_text_from_image_with_shift) {
+    string image_path = "boat.png";
+    string text = "Hello World" ;
+    string output_path = "test_image_encode.png" ;
+    int shift = 5;
+
+    bool encode_result = encode_text_into_image(image_path, text, output_path, 100, shift);
+    ASSERT_TRUE(encode_result);
+
+    string decoded_text = decode_text_from_image(output_path, 100, shift);
+    EXPECT_EQ(decoded_text, text);
+}
+
+// "Czggj Rjmgy"
 
 
 
