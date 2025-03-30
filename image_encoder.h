@@ -97,7 +97,7 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
     */
 
     //saving the image
-    if (!cv::imwrite(output_path, image)) {
+    if (!cv::imwrite("../" + output_path, image)) {     // the ../ and the error
         std::cerr << "Could not save the encoded image." << std::endl;
         return false;
     }

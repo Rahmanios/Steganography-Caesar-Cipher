@@ -96,6 +96,7 @@ std::string decode_text_from_image(const std::string& image_path, int pixel_offs
         decoded_text = caesar_decrypt(decoded_text, shiftvalue);
     }
 
+    std::cout << "SHIFT--------------->>> "<<shiftvalue<<std::endl;
 
     return decoded_text ;
 }
