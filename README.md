@@ -45,15 +45,9 @@ E-mail: rahmanio@coventry.ac.uk <br>
 ## Getting Started
 ### Dependencies
 **Requirements and Libraries**: <br>
-* Python 3.11
-* Windows Operating System
-* Linux Operating System
-* platform
-* socket
-* os
-* csv
-* Subprocess
-* psutil 
+* OpenCV
+* GTest
+* 
 
 ## Docstrings:
 ### main.cpp
@@ -67,7 +61,7 @@ E-mail: rahmanio@coventry.ac.uk <br>
 *1-encode a text into an image using the Least significant bit (LSB) method
 *2-decode a text from an image that was previously encoded using the LSB method
 *3-Optionally encrypt or decrypy the text with caesar cipher
-*
+
 *@headerfile caesar_cipher.h : for encrypting and decrypting the text using caesar cipher
 *@headerfile image_encoder.h : for encoding the text into the image
 *@headerfile image_decoder.h : for decoding the text from the image
@@ -89,7 +83,6 @@ main_menu
  * decoded_text : string
  * -the decoded string to be returned from decode_text_from_image function and to be shown to the user
  * @return saves the encoded image
-
 */
 ```
 ***
@@ -119,7 +112,7 @@ caesar_decrypt
  * @param text the text to decrypt
  * @param shift The number of positions to shift each character
  * @return the decrypt text
- */ 
+*/ 
 ```
 ***
 ### image_encoder.h
@@ -160,12 +153,42 @@ caesar_decrypt
  * total_pixels : integer
  * - it used to calculate the size of the image in order to know if the image has enough pixel to be converted
  * @return saves the encoded image
- */
+*/
 ```
 
 ### image_decoder.h
 ```cpp
-
+/**
+*@file image_decoder.h
+*@brief functions for decoding text into an image using the LSB method
+*this file contains decode_text_from_image function, which extracts text from an image that was previously encoded
+*using the LSB method.
+*/
+/**
+ *@brief decodes the text from an image using the LSB method
+ * @param image_path path to the encoded image file
+ * @param pixel_offset the number of pixels to be skipped before starting the encoding (100)
+ * @param shiftvalue the shift value for the caesar cipher decryption
+ * @return decoded_text
+ * variables
+ *-----------
+ *image_path : string
+ * - The image path
+ * pixel_offset : integer
+ * - an integer number to determine the start point (pixel) for encryption
+ * shiftvalue : int
+ * - the number for shifting each character
+ * binary_text : string
+ * - the variable to hold the strings of binary values of the processed (shifted) text for encryption
+ * end_symbol : string
+ * - the symbol (%%%) as a delimiter to know where is the end of encoded string
+ * bit : char
+ * - the variable to hold the extracted LSB of the image
+ * c : char
+ * - converting the 8 bit to character in order to find the end symbol
+ * last_3_byte : string
+ * - the variable to find the delimiter %%%
+*/
 ```
 
 ### 

@@ -26,7 +26,16 @@
  * - an integer number to determine the start point (pixel) for encryption
  * shiftvalue : int
  * - the number for shifting each character
- *
+ * binary_text : string
+ * - the variable to hold the strings of binary values of the processed (shifted) text for encryption
+ * end_symbol : string
+ * - the symbol (%%%) as a delimiter to know where is the end of encoded string
+ * bit : char
+ * - the variable to hold the extracted LSB of the image
+ * c : char
+ * - converting the 8 bit to character in order to find the end symbol
+ * last_3_byte : string
+ * - the variable to find the delimiter %%%
  */
 
 std::string decode_text_from_image(const std::string& image_path, int pixel_offset = 100, int shiftvalue = 0) {
@@ -41,19 +50,25 @@ std::string decode_text_from_image(const std::string& image_path, int pixel_offs
     //std::cout<<"binary text is: " <<binary_text<<std::endl;
     bool end_symbol = false;
 
-    //extracting the binary text from image with LSB method
+    //extracting the binary text from image with LSB
+    // looping over rows of the image starting from pixel_offset
     for (int i=pixel_offset; i<image.rows; ++i) {
+        // looping over the columns of the image
         for (int j = 0; j < image.cols; ++j) {
+            // loops over the three color channel BGR
             for (int k = 0 ; k < 3 ; ++k ) {
+                // extracting the LSB of the pixel. &1 isolates the last bit of the 8 bit value
                 char bit = (image.at<cv::Vec3b>(i, j)[k] & 1) + '0';
                 binary_text += bit;
                 //std::cout<<"binary_text is --->> "<<binary_text << std::endl;
 
                 //finding the ending symbol we used before %%%
                 if (binary_text.length() % 8 == 0) {
-                    std::string byte = binary_text.substr(binary_text.length() - 8, 8) ;//extracting the last 8 bits
+                    //extracting the last 8 bits
+                    std::string byte = binary_text.substr(binary_text.length() - 8, 8) ;
                     //char c = static_cast<char>(bitset<8>(byte).to_ullong()) ;
-                    char c = static_cast<char>(std::bitset<8>(byte).to_ulong()) ;//converting the 8bit into character
+                    //converting the 8bit into character
+                    char c = static_cast<char>(std::bitset<8>(byte).to_ulong()) ;
                     //std::cout << "------------char c ------------> " << c << std::endl;
                     if (c == '%' && binary_text.length() >= 24) {
                         //checking for the last 3 character is %%%
