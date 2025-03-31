@@ -24,6 +24,23 @@
  * @return true if the encoding is successful, otherwise it returns false
  * variables
  * ----------
+ * image_path : string
+ * - The image path
+ * text : string
+ * - the text to be encrypted into the image
+ * output_path : string
+ * - the path for saving the encrypted image
+ * pixel_offset : integer
+ * - an integer number to determine the start point (pixel) for encryption
+ * shiftvalue : int
+ * - the number for shifting each character
+ * processed_text : string
+ * - the string for holding the result of calling the Caesar_encrypt (shifted text)
+ * binary_text : string
+ * - the variable to hold the strings of binary values of the processed (shifted) text for encryption
+ * total_pixels : integer
+ * - it used to calculate the size of the image in order to know if the image has enough pixel to be converted
+ * @return saves the encoded image
  */
 
 bool encode_text_into_image(const std::string& image_path, const std::string& text, const std::string& output_path,int pixel_offset = 100, int shiftvalue = 0) {
@@ -73,10 +90,10 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
         }
         if (index >= binary_text.length()) break;
     }
-    std::cout << "binary_text.length() -> " << binary_text.length() << std::endl;
-    std::cout << "procesed_text.length() -> " << processed_text.length() << std::endl;
-    std::cout << "processed_text -> " << processed_text << std::endl;
-    std::cout << "binary_text -> " << binary_text << std::endl;
+    //std::cout << "binary_text.length() -> " << binary_text.length() << std::endl;
+    //std::cout << "procesed_text.length() -> " << processed_text.length() << std::endl;
+    //std::cout << "processed_text -> " << processed_text << std::endl;
+    //std::cout << "binary_text -> " << binary_text << std::endl;
 
     /*
     for (int i = pixel_offset; i < image.rows ; ++i) {
@@ -97,7 +114,7 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
     */
 
     //saving the image
-    if (!cv::imwrite("../" + output_path, image)) {     // the ../ and the error
+    if (!cv::imwrite(output_path, image)) {     // the "../" +  and the error
         std::cerr << "Could not save the encoded image." << std::endl;
         return false;
     }

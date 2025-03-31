@@ -26,13 +26,13 @@
 //using namespace std;
 
 /**
- *main menu for the program
+ *main_menu for the program
  * Variables
  * ---------
  * choice : integer
  * -the menu choice number 1 for encrypt and 2 for decrypt.
  * image_path : string
- * -The image path for encrypting
+ * -The image path
  * text : string
  * -the text to be encrypted into the image
  * output_path : string
@@ -107,6 +107,7 @@ int main() {
         return -1;
     }
     return 0;
+
 }
 
 //

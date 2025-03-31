@@ -20,7 +20,12 @@
  * @return decoded_text
  * variables
  *-----------
- *
+ *image_path : string
+ * - The image path
+ * pixel_offset : integer
+ * - an integer number to determine the start point (pixel) for encryption
+ * shiftvalue : int
+ * - the number for shifting each character
  *
  */
 
@@ -33,7 +38,7 @@ std::string decode_text_from_image(const std::string& image_path, int pixel_offs
     }
 
     std::string binary_text ;
-    std::cout<<"binary text is: " <<binary_text<<std::endl;
+    //std::cout<<"binary text is: " <<binary_text<<std::endl;
     bool end_symbol = false;
 
     //extracting the binary text from image with LSB method
@@ -42,14 +47,14 @@ std::string decode_text_from_image(const std::string& image_path, int pixel_offs
             for (int k = 0 ; k < 3 ; ++k ) {
                 char bit = (image.at<cv::Vec3b>(i, j)[k] & 1) + '0';
                 binary_text += bit;
-                std::cout<<"binary_text is --->> "<<binary_text << std::endl;
+                //std::cout<<"binary_text is --->> "<<binary_text << std::endl;
 
                 //finding the ending symbol we used before %%%
                 if (binary_text.length() % 8 == 0) {
                     std::string byte = binary_text.substr(binary_text.length() - 8, 8) ;//extracting the last 8 bits
                     //char c = static_cast<char>(bitset<8>(byte).to_ullong()) ;
                     char c = static_cast<char>(std::bitset<8>(byte).to_ulong()) ;//converting the 8bit into character
-                    std::cout << "------------char c ------------> " << c << std::endl;
+                    //std::cout << "------------char c ------------> " << c << std::endl;
                     if (c == '%' && binary_text.length() >= 24) {
                         //checking for the last 3 character is %%%
                         std::string last_3_byte;
@@ -61,7 +66,7 @@ std::string decode_text_from_image(const std::string& image_path, int pixel_offs
                             //std::cout << "last_3_byte -> " << last_3_byte <<std::endl;
                             //std::cout << "byte -> " << byte <<std::endl;
                         }
-                        std::cout << "last_3_byte -> " << last_3_byte <<std::endl;
+                        //std::cout << "last_3_byte -> " << last_3_byte <<std::endl;
                         if (last_3_byte == "%%%") {
                             end_symbol = true;
                             break;
@@ -73,16 +78,16 @@ std::string decode_text_from_image(const std::string& image_path, int pixel_offs
         }
         if (end_symbol) break;
     }
-    std::cout << "binary_text.length() -> " << binary_text.length() << std::endl;
-    std::cout << "binary_text -> " << binary_text << std::endl;
+    //std::cout << "binary_text.length() -> " << binary_text.length() << std::endl;
+    //std::cout << "binary_text -> " << binary_text << std::endl;
 
     //Removing the end_symbol
-    std::cout << "removing the end symbol"<<std::endl;
+    //std::cout << "removing the end symbol"<<std::endl;
     binary_text = binary_text.substr(0, binary_text.length() - 24 );
     //std::cout << "binary_text without %%% is: -> " << binary_text << std::endl;
 
     //converting binary_text to string
-    std::cout << "converting binary_text to string"<<std::endl;
+    //std::cout << "converting binary_text to string"<<std::endl;
     std::string decoded_text ;
     // size_t for getting the size of object in memory
     for (size_t i = 0 ; i < binary_text.length(); i += 8) {
@@ -90,13 +95,13 @@ std::string decode_text_from_image(const std::string& image_path, int pixel_offs
         char c = static_cast<char>(std::bitset<8>(byte).to_ulong()) ;
         decoded_text += c;
     }
-    std::cout << "decrypt the encoded_text if there is a shift value"<<std::endl;
+    //std::cout << "decrypt the encoded_text if there is a shift value"<<std::endl;
     // decrypt the encoded_text if there is a shift value
     if (shiftvalue != 0) {
         decoded_text = caesar_decrypt(decoded_text, shiftvalue);
     }
 
-    std::cout << "SHIFT--------------->>> "<<shiftvalue<<std::endl;
+    //std::cout << "SHIFT--------------->>> "<<shiftvalue<<std::endl;
 
     return decoded_text ;
 }
