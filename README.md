@@ -16,7 +16,6 @@ E-mail: rahmanio@coventry.ac.uk <br>
 * **Text Decoding:** Extract hidden messages from encoded images
 * **Encryption:** Using Caesar Cipher encryption for more security(Uses 0 for no encryption)
 * **Pixel Offset:** Configure starting pixel for encoding to improve security (Starts from 100)
-* **Image Comparison:** 
 * **Cross-Platform:** Works on windows and Linux
 
 ### Requirements
@@ -28,22 +27,14 @@ E-mail: rahmanio@coventry.ac.uk <br>
 
 ├── **CMakeLists.txt** &emsp;&emsp;&emsp;&emsp;         # Build configuration <br>
 ├── **README.md** &emsp;&emsp;&emsp;&emsp;&emsp;              # This file <br>
-├── **include/** <br>
-│   ├── **caesar_cipher.h** &emsp;&emsp;&emsp;&emsp;    # Caesar Cipher encryption/decryption <br>
-│   ├── **image_decoder.h** &emsp;&emsp;&emsp;&emsp;    # Image decoding functionality <br>
-│   ├── **image_encoder.h** &emsp;&emsp;&emsp;&emsp;    # Image encoding functionality <br>
-│   └── **mainwindow.h**    &emsp;&emsp;&emsp;&emsp;    # Main application window <br>
-├── **src/** <br>
-│   ├── **caesar_cipher.cpp** &emsp;&emsp;&emsp;&emsp;  # Caesar Cipher implementation <br>
-│   ├── **image_decoder.cpp** &emsp;&emsp;&emsp;&emsp;  # Decoder implementation <br>
-│   ├── **image_encoder.cpp** &emsp;&emsp;&emsp;&emsp;  # Encoder implementation <br>
-│   ├── **main.cpp**  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  # Application entry point <br>
-│   └── **mainwindow.cpp**    &emsp;&emsp;&emsp;&emsp;&emsp;  # Main window implementation <br>
-└── **ui/** <br>
-└── **mainwindow.ui**   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;    # Qt Designer UI file <br>
+├── **caesar_cipher.h** &emsp;&emsp;&emsp;&emsp;    # Caesar Cipher encryption/decryption <br>
+├── **image_decoder.h** &emsp;&emsp;&emsp;&emsp;    # Image decoding functionality <br>
+├── **image_encoder.h** &emsp;&emsp;&emsp;&emsp;    # Image encoding functionality <br>
+├── **TEST_CASES** <br>
+│   ├── **test_cases.cpp** &emsp;&emsp;&emsp;&emsp;  # Caesar Cipher implementation <br>
+│   ├── **CMakeLists.txt** &emsp;&emsp;&emsp;&emsp;  # Decoder implementation <br>
 
-**Privilege Escalation** method uses two different privesc methods using vulnerabilities in the Linux system, **ssh** to read shadow file and **wget** to download file from internet without asking for root permissions
-the program runs by the main project file named **Menu.py** which is the designed menu for both tasks. the end user can read and choose the menu options to choose and run each Enumeration and Privilege Escalation methods. finally user has the option of saving the result in a CSV file or just a printed data on screen
+
 
 ## Encoding and Decoding videos <br>
 ### Encoding a text into an image <br>
