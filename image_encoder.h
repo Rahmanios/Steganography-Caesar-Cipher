@@ -58,13 +58,13 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
     //adding a unique symbol to the end of the text
     processed_text += "%%%";
 
-    std::cout << "processed_text -> " << processed_text << std::endl;
+    //std::cout << "processed_text -> " << processed_text << std::endl;
     //converting the processed_text into binary string
     std::string binary_text;
     for (char c : processed_text) {
         binary_text += std::bitset<8>(c).to_string();
     }
-    std::cout << "binary_text + %%% -> " << binary_text << std::endl;
+    //std::cout << "binary_text + %%% -> " << binary_text << std::endl;
 
     //checking if the image has enough pixels to be encoded
     int total_pixels = image.rows * image.cols * 3; //considering BGR
@@ -94,6 +94,8 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
     //std::cout << "procesed_text.length() -> " << processed_text.length() << std::endl;
     //std::cout << "processed_text -> " << processed_text << std::endl;
     //std::cout << "binary_text -> " << binary_text << std::endl;
+    std::cout << "output_path -> " << output_path << std::endl;
+
 
     /*
     for (int i = pixel_offset; i < image.rows ; ++i) {
@@ -114,7 +116,7 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
     */
 
     //saving the image
-    if (!cv::imwrite(output_path, image)) {     // the "../" +  and the error
+    if (!cv::imwrite("../" + output_path, image)) {     // the "../" +  and the error
         std::cerr << "Could not save the encoded image." << std::endl;
         return false;
     }

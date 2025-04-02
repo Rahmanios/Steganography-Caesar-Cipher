@@ -102,7 +102,7 @@ std::string decode_text_from_image(const std::string& image_path, int pixel_offs
     //std::cout << "binary_text without %%% is: -> " << binary_text << std::endl;
 
     //converting binary_text to string
-    //std::cout << "converting binary_text to string"<<std::endl;
+    std::cout << "converting binary_text to string"<<std::endl;
     std::string decoded_text ;
     // size_t for getting the size of object in memory
     for (size_t i = 0 ; i < binary_text.length(); i += 8) {
@@ -112,12 +112,12 @@ std::string decode_text_from_image(const std::string& image_path, int pixel_offs
     }
     //std::cout << "decrypt the encoded_text if there is a shift value"<<std::endl;
     // decrypt the encoded_text if there is a shift value
+    std::cout << "ShiftValue -------> "<<shiftvalue<<std::endl;
     if (shiftvalue != 0) {
+        std::cout << "<------- Processing the IF statement -------> "<<shiftvalue<<std::endl;
         decoded_text = caesar_decrypt(decoded_text, shiftvalue);
     }
-
     //std::cout << "SHIFT--------------->>> "<<shiftvalue<<std::endl;
-
     return decoded_text ;
 }
 

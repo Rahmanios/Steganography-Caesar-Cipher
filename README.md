@@ -38,9 +38,11 @@ E-mail: rahmanio@coventry.ac.uk <br>
 
 ## Encoding and Decoding videos <br>
 ### Encoding a text into an image <br>
-  [youtube video for Encoding functionality](https://youtu.be/wcXsDp8QKcM)<br><br>
+[youtube video for Encoding functionality (Linux)](https://youtu.be/wcXsDp8QKcM)<br>
+[youtube video for Encoding functionality (Windows)](https://youtu.be/wcXsDp8QKcM)<br><br>
 ### Decoding a text from an image <br>
-  [youtube video for Decoding functionality](https://youtu.be/xGw5J1biWJM)
+[youtube video for Decoding functionality (Linux)](https://youtu.be/xGw5J1biWJM)<br>
+[youtube video for Decoding functionality (Windows)](https://youtu.be/xGw5J1biWJM)
 
 ## Getting Started
 ### Dependencies

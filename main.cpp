@@ -68,7 +68,7 @@ int main() {
 
         if( shiftvalue >= 0 && shiftvalue <= 20) {
             output_path =image_path.substr(0,image_path.find_last_of(".")) + "_encoded.png";
-            if (!encode_text_into_image(image_path, text, "../" + output_path, 100 , shiftvalue)) {
+            if (!encode_text_into_image(image_path, text, output_path, 100 , shiftvalue)) {
                 return -1;
             }
         }else {
