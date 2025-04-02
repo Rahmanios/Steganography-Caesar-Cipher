@@ -21,10 +21,8 @@
 #include "caesar_cipher.h"
 #include "image_encoder.h"
 #include "image_decoder.h"
-
 //using namespace cv;
 //using namespace std;
-
 /**
  *main_menu for the program
  * Variables
@@ -107,7 +105,6 @@ int main() {
         return -1;
     }
     return 0;
-
 }
 
 //

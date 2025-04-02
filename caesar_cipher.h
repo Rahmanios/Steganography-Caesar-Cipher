@@ -32,7 +32,6 @@ std::string caesar_encrypt(const std::string& text, int shift) {
     }
     return encrypted_text;
 }
-
 /**
  *@brief This function reverse the Caesar cipher encryption by shifting each character to the original position
  * @param text the text to decrypt
@@ -42,4 +41,4 @@ std::string caesar_encrypt(const std::string& text, int shift) {
 std::string caesar_decrypt(const std::string& text, int shift) {
     return caesar_encrypt(text, 26 - shift); //just shifting back
 }
-#endif //CAESAR_CIPHER_H
+#endif

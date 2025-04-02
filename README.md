@@ -7,10 +7,13 @@ E-mail: rahmanio@coventry.ac.uk <br>
 ---
 ## Description:
 ### This project has been written  <br>
-**A GUI based application for encoding the text message into a PNG image and also decoding the message from the image using the Least Signification Bit (LSB) method with Caesar Cipher optional encryption.**
+**The application for encoding the text message into a PNG image and also decoding the message from the image using the
+Least Signification Bit (LSB) method with Caesar Cipher optional encryption.**<br><br>
+**This application has been made as coursework for Programming and Operating systems module**
 
 ## Application Screenshot:
-
+![img.png](img.png)
+<br>
 ### Features
 * **Text Encoding:** Hide secret messages in a .PNG images
 * **Text Decoding:** Extract hidden messages from encoded images
@@ -30,6 +33,10 @@ E-mail: rahmanio@coventry.ac.uk <br>
 ├── **caesar_cipher.h** &emsp;&emsp;&emsp;&emsp;    # Caesar Cipher encryption/decryption <br>
 ├── **image_decoder.h** &emsp;&emsp;&emsp;&emsp;    # Image decoding functionality <br>
 ├── **image_encoder.h** &emsp;&emsp;&emsp;&emsp;    # Image encoding functionality <br>
+├── **1 (6).jpg** &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; # jpg image file <br>
+├── **boat.png** &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; # jpg image file <br>
+├── **boat_encoded.png** &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; # jpg image file <br>
+
 ├── **TEST_CASES** <br>
 │&emsp;├── **test_cases.cpp** &emsp;&emsp;&emsp;&emsp;  # Test cases implementation <br>
 │&emsp;├── **CMakeLists.txt** &emsp;&emsp;&emsp;&emsp;  # Build configuration <br>
@@ -37,19 +44,20 @@ E-mail: rahmanio@coventry.ac.uk <br>
 
 
 ## Encoding and Decoding videos <br>
-### Encoding a text into an image <br>
-[youtube video for Encoding functionality (Linux)](https://youtu.be/wcXsDp8QKcM)<br>
-[youtube video for Encoding functionality (Windows)](https://youtu.be/wcXsDp8QKcM)<br><br>
-### Decoding a text from an image <br>
-[youtube video for Decoding functionality (Linux)](https://youtu.be/xGw5J1biWJM)<br>
-[youtube video for Decoding functionality (Windows)](https://youtu.be/xGw5J1biWJM)
+### Encode and Decoding a text into an image in Linux <br>
+[Youtube video for Encoding and Decoding functionality (Linux)](https://www.youtube.com/watch?v=addbznxiO7U)<br>
+### Encode and Decoding a text into an image in Windows <br>
+[Youtube video for Decoding and Decoding functionality (Windows)](https://www.youtube.com/watch?v=a7K9OVJ7onU)<br>
+### Test cases using GTEST <br>
+[Youtube video for test cases](http://youtube.com/watch?v=99stAahhIEk)
+<hr>
 
 ## Getting Started
 ### Dependencies
 **Requirements and Libraries**: <br>
 * OpenCV
 * GTest
-* 
+
 
 ## Docstrings:
 ### main.cpp

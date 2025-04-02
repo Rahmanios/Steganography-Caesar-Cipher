@@ -72,7 +72,6 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
         std::cerr << "Image is too small to encode the text." << std::endl;
         return false;
     }
-
     //Encoding section
     int index = 0;
     for (int i = pixel_offset; i < image.rows; ++i) {        //loop into rows start from offset
@@ -96,7 +95,6 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
     //std::cout << "binary_text -> " << binary_text << std::endl;
     std::cout << "output_path -> " << output_path << std::endl;
 
-
     /*
     for (int i = pixel_offset; i < image.rows ; ++i) {
         for (int j = 0; j < image.cols ; ++j) {
@@ -114,7 +112,6 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
         if (index >= binary_text.length()) break;
     }
     */
-
     //saving the image
     if (!cv::imwrite("../" + output_path, image)) {     // the "../" +  and the error
         std::cerr << "Could not save the encoded image." << std::endl;
@@ -124,7 +121,6 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
     std::cout << "Image encoded successfully into: " << output_path << std::endl;
     return true;
 }
-
 #endif //IMAGE_ENCODER_H
 
 //

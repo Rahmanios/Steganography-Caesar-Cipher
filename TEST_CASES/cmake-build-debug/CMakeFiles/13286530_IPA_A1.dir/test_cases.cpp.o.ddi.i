@@ -117789,7 +117789,6 @@ std::string caesar_encrypt(const std::string& text, int shift) {
 
 
 
-
 std::string caesar_decrypt(const std::string& text, int shift) {
     return caesar_encrypt(text, 26 - shift);
 }
@@ -193028,7 +193027,6 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
         return false;
     }
 
-
     int index = 0;
     for (int i = pixel_offset; i < image.rows; ++i) {
         for (int j = 0; j < image.cols; ++j) {
@@ -193050,7 +193048,7 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
 
 
     std::cout << "output_path -> " << output_path << std::endl;
-# 119 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/../image_encoder.h"
+# 116 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/../image_encoder.h"
     if (!cv::imwrite("../" + output_path, image)) {
         std::cerr << "Could not save the encoded image." << std::endl;
         return false;
@@ -197056,7 +197054,116 @@ image_decode_test_wrong_image_path_Test
 # 155 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
                                ;
 }
-# 171 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+
+
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+static_assert(sizeof(
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+"image_decode_test"
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+) > 1, "test_suite_name must not be empty"); static_assert(sizeof(
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+"not_encoded_image"
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+) > 1, "test_name must not be empty"); class 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+image_decode_test_not_encoded_image_Test 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+: public ::testing::Test { public: 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+image_decode_test_not_encoded_image_Test
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+() = default; ~
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+image_decode_test_not_encoded_image_Test
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+() override = default; 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+image_decode_test_not_encoded_image_Test 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+(const 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+image_decode_test_not_encoded_image_Test 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+&) = delete; 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+image_decode_test_not_encoded_image_Test 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+& operator=( const 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+image_decode_test_not_encoded_image_Test 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+&) = delete; 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+image_decode_test_not_encoded_image_Test 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+(
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+image_decode_test_not_encoded_image_Test 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+&&) noexcept = delete; 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+image_decode_test_not_encoded_image_Test 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+& operator=( 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+image_decode_test_not_encoded_image_Test 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+&&) noexcept = delete; private: void TestBody() override; [[maybe_unused]] static ::testing::TestInfo* const test_info_; }; ::testing::TestInfo* const 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+image_decode_test_not_encoded_image_Test
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+::test_info_ = ::testing::internal::MakeAndRegisterTestInfo( 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+"image_decode_test"
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+, 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+"not_encoded_image"
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+, nullptr, nullptr, ::testing::internal::CodeLocation("/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp", 158), (::testing::internal::GetTestTypeId()), ::testing::internal::SuiteApiResolver< ::testing::Test>::GetSetUpCaseOrSuite("/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp", 158), ::testing::internal::SuiteApiResolver< ::testing::Test>::GetTearDownCaseOrSuite("/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp", 158), new ::testing::internal::TestFactoryImpl<
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+image_decode_test_not_encoded_image_Test
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+>); void 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+image_decode_test_not_encoded_image_Test
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+::TestBody() 
+# 158 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+                                          {
+
+    create_test_image("test.png");
+
+
+    string decoded = decode_text_from_image("test.png");
+    
+# 164 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+   switch (0) case 0: default: if (const ::testing::AssertionResult gtest_ar_ = ::testing::AssertionResult(!(
+# 164 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+   decoded.empty()
+# 164 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+   ))) ; else ::testing::internal::AssertHelper(::testing::TestPartResult::kNonFatalFailure, "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp", 164, ::testing::internal::GetBoolAssertionFailureMessage( gtest_ar_, 
+# 164 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+   "decoded.empty()"
+# 164 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+   , 
+# 164 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+   "true"
+# 164 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+   , 
+# 164 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+   "false"
+# 164 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp" 3
+   ) .c_str()) = ::testing::Message()
+# 164 "/home/kali/Documents/13286530_IPA_A1/TEST_CASES/test_cases.cpp"
+                                ;
+
+    cleanup_test_files();
+}
+
+
+
 int main() {
     testing::InitGoogleTest();
     return RUN_ALL_TESTS();

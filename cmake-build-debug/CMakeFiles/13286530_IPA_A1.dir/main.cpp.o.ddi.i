@@ -193032,7 +193032,6 @@ std::string caesar_encrypt(const std::string& text, int shift) {
 
 
 
-
 std::string caesar_decrypt(const std::string& text, int shift) {
     return caesar_encrypt(text, 26 - shift);
 }
@@ -193069,7 +193068,6 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
         return false;
     }
 
-
     int index = 0;
     for (int i = pixel_offset; i < image.rows; ++i) {
         for (int j = 0; j < image.cols; ++j) {
@@ -193091,7 +193089,7 @@ bool encode_text_into_image(const std::string& image_path, const std::string& te
 
 
     std::cout << "output_path -> " << output_path << std::endl;
-# 119 "/home/kali/Documents/13286530_IPA_A1/image_encoder.h"
+# 116 "/home/kali/Documents/13286530_IPA_A1/image_encoder.h"
     if (!cv::imwrite("../" + output_path, image)) {
         std::cerr << "Could not save the encoded image." << std::endl;
         return false;
@@ -193186,7 +193184,7 @@ std::string decode_text_from_image(const std::string& image_path, int pixel_offs
     return decoded_text ;
 }
 # 24 "/home/kali/Documents/13286530_IPA_A1/main.cpp" 2
-# 44 "/home/kali/Documents/13286530_IPA_A1/main.cpp"
+# 42 "/home/kali/Documents/13286530_IPA_A1/main.cpp"
 int main() {
     int choice;
     std::cout<<"Choose an Option:\n1. Encode a Text Into an Image\n2. Decode a Text From an Image\n";
@@ -193220,7 +193218,7 @@ int main() {
         }else {
             std::cout<<"The shift value must be a number between 0 to 20";
         }
-# 88 "/home/kali/Documents/13286530_IPA_A1/main.cpp"
+# 86 "/home/kali/Documents/13286530_IPA_A1/main.cpp"
     }else if(choice==2) {
         std::string image_path;
         int shiftvalue = 0;
@@ -193243,5 +193241,4 @@ int main() {
         return -1;
     }
     return 0;
-
 }

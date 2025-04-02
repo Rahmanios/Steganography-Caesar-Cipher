@@ -121,7 +121,6 @@ std::string decode_text_from_image(const std::string& image_path, int pixel_offs
     return decoded_text ;
 }
 
-
 #endif //IMAGE_DECODER_H
 //
 // Created by User on 11/03/2025.

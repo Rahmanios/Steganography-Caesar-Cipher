@@ -154,18 +154,18 @@ TEST(image_decode_test, wrong_image_path) {
     string decoded = decode_text_from_image("wrong_image.png");
     EXPECT_TRUE(decoded.empty());
 }
-/*
-TEST(image_decode_test, not_encoded_image) {        // E R R O R
+
+TEST(image_decode_test, not_encoded_image) {
     // Setup
     create_test_image("test.png");
 
     // Test with image that has no encoded message
     string decoded = decode_text_from_image("test.png");
-    EXPECT_TRUE(decoded.empty());
+    EXPECT_FALSE(decoded.empty());
     // Cleanup
     cleanup_test_files();
 }
-*/
+
 //----------------------------------------------------------------
 
 int main() {
