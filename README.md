@@ -31,8 +31,8 @@ E-mail: rahmanio@coventry.ac.uk <br>
 ├── **image_decoder.h** &emsp;&emsp;&emsp;&emsp;    # Image decoding functionality <br>
 ├── **image_encoder.h** &emsp;&emsp;&emsp;&emsp;    # Image encoding functionality <br>
 ├── **TEST_CASES** <br>
-│   ├── **test_cases.cpp** &emsp;&emsp;&emsp;&emsp;  # Caesar Cipher implementation <br>
-│   ├── **CMakeLists.txt** &emsp;&emsp;&emsp;&emsp;  # Decoder implementation <br>
+│&emsp;├── **test_cases.cpp** &emsp;&emsp;&emsp;&emsp;  # Test cases implementation <br>
+│&emsp;├── **CMakeLists.txt** &emsp;&emsp;&emsp;&emsp;  # Build configuration <br>
 
 
 
@@ -191,14 +191,4 @@ caesar_decrypt
  * last_3_byte : string
  * - the variable to find the delimiter %%%
 */
-```
-
-### 
-```cpp
-
-```
-
-### 
-```cpp
-
 ```

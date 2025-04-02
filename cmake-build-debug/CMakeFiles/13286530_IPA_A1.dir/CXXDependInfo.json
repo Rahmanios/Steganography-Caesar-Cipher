@@ -1,21 +1,21 @@
 {
 	"bmi-installation" : null,
-	"compiler-frontend-variant" : "MSVC",
-	"compiler-id" : "MSVC",
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "GNU",
 	"compiler-simulate-id" : "",
 	"config" : "Debug",
 	"cxx-modules" : {},
-	"dir-cur-bld" : "C:/Users/User/Documents/13286530_IPA_A1/cmake-build-debug",
-	"dir-cur-src" : "C:/Users/User/Documents/13286530_IPA_A1",
-	"dir-top-bld" : "C:/Users/User/Documents/13286530_IPA_A1/cmake-build-debug",
-	"dir-top-src" : "C:/Users/User/Documents/13286530_IPA_A1",
+	"dir-cur-bld" : "/home/kali/Documents/13286530_IPA_A1/cmake-build-debug",
+	"dir-cur-src" : "/home/kali/Documents/13286530_IPA_A1",
+	"dir-top-bld" : "/home/kali/Documents/13286530_IPA_A1/cmake-build-debug",
+	"dir-top-src" : "/home/kali/Documents/13286530_IPA_A1",
 	"exports" : [],
 	"forward-modules-from-target-dirs" : [],
 	"include-dirs" : 
 	[
-		"C:\\Program Files (x86)\\OpenCV\\include"
+		"/usr/local/include/opencv4"
 	],
 	"language" : "CXX",
 	"linked-target-dirs" : [],
-	"module-dir" : "C:/Users/User/Documents/13286530_IPA_A1/cmake-build-debug/CMakeFiles/13286530_IPA_A1.dir"
+	"module-dir" : "/home/kali/Documents/13286530_IPA_A1/cmake-build-debug/CMakeFiles/13286530_IPA_A1.dir"
 }
