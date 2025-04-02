@@ -112,9 +112,9 @@ std::string decode_text_from_image(const std::string& image_path, int pixel_offs
     }
     //std::cout << "decrypt the encoded_text if there is a shift value"<<std::endl;
     // decrypt the encoded_text if there is a shift value
-    std::cout << "ShiftValue -------> "<<shiftvalue<<std::endl;
+    //std::cout << "ShiftValue -------> "<<shiftvalue<<std::endl;
     if (shiftvalue != 0) {
-        std::cout << "<------- Processing the IF statement -------> "<<shiftvalue<<std::endl;
+        //std::cout << "<------- Processing the IF statement -------> "<<shiftvalue<<std::endl;
         decoded_text = caesar_decrypt(decoded_text, shiftvalue);
     }
     //std::cout << "SHIFT--------------->>> "<<shiftvalue<<std::endl;

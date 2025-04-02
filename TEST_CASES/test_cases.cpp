@@ -2,13 +2,13 @@
 #include "../caesar_cipher.h"
 #include "../image_encoder.h"
 #include <opencv2/opencv.hpp>
-
+#include <filesystem>
 #include "../image_decoder.h"
 
 using namespace std;
 using namespace cv;
     // CAESAR ENCODE DECODE TESTS
-// testing if it encrypts and if the shift value is right
+// testing if it encrypts and if the shift value works right
 TEST(caesar_test, encrypt_text) {
     // Arrange
     string text = "Hello, World";
@@ -41,74 +41,132 @@ TEST(shift_test, encrypt_text) {
     EXPECT_EQ(no_encrypt, "Hello, world");
 }
 // testing the large shift value
+// the large shift value is passed in this test but its limited in the menu
+//so the menu checks the shift value it accepts the shift between 0 and 20
 TEST(caesar_test, L_shift) {
     string text = "Hello, World" ;
     int shift = 26;
     string encrypted_text = caesar_encrypt(text, shift);
     EXPECT_EQ(encrypted_text,text);
 }
-    // /CAESAR ENCODE DECODE TESTS
-    // ENCODING TESTS
-TEST(image_encoder_test, encode_text) {
-    string image_path = "../boat.png" ;
-    string text = "Hello World" ;
-    string output_path = "test_image_encode.png" ;
-    int shift = 0;
-    // creating a blank test image
-    //cv::Mat image(300, 300, CV_8UC3, cv::Scalar(255, 255, 255));
-    //cv::imwrite(image_path, image);
-    // encoding text into the image
-    bool result = encode_text_into_image(image_path, text, output_path, 100, shift);
-    EXPECT_TRUE(result);
-}
-TEST(image_encoder_test, encode_shifted_text) {
-    string image_path = "../boat.png" ;
-    string text = "Hello World" ;
-    string output_path = "test_image_encode.png" ;
-    int shift = 3;
-    // creating a blank test image
-    //cv::Mat image(300, 300, CV_8UC3, cv::Scalar(255, 255, 255));
-    //cv::imwrite(image_path, image);
-    // encoding text into the image
-    bool result = encode_text_into_image(image_path, text, output_path, 100, shift);
-    EXPECT_TRUE(result);
-}
-    // /ENCODING TESTS
-    // DECODING TESTS
-//decoding a text with no shift
-TEST(image_decoder_test, decode_text_from_image) {
-    string image_path = "boat.png";
-    string text = "Hello World" ;
-    string output_path = "test_image_encode.png" ;
-    int shift = 0;
-
-    bool encode_result = encode_text_into_image(image_path, text, output_path, 100, shift);
-    ASSERT_TRUE(encode_result);
-
-    string decoded_text = decode_text_from_image(output_path, 100, shift);
-    EXPECT_EQ(decoded_text, text);
-}
-
-//decoding a text with shift value
-/*
-TEST(image_decoder_test, decode_text_from_image_with_shift) {
-    string image_path = "boat.png";
-    string text = "Hello World" ;
-    string output_path = "test_image_encode.png" ;
+// testing for nonalphabetic characters
+TEST(caesar_test,nonalphabetic) {
+    string text = "123!@#";
     int shift = 5;
+    EXPECT_EQ(caesar_encrypt(text,shift),"123!@#");
+    EXPECT_EQ(caesar_encrypt("Hello, World!",3),"Khoor, Zruog!");
+}
+    // /CAESAR ENCODE DECODE TESTS
+//-------------------------------------------------------------------------
+    // ENCODING TESTS
+// the function to create an image for testing
+void create_test_image(const string& path) {
+    Mat test_image(500,500,CV_8UC3, Scalar(255,255,255));
+    imwrite("../" + path, test_image);
+}
+// the function to clean the test files
+void cleanup_test_files() {
+    if (filesystem::exists("../test.png")) {
+        filesystem::remove("../test.png");
+    }
+    if (filesystem::exists("../test_encoded.png")) {
+        filesystem::remove("../test_encoded.png");
+    }
+}
+//------------------------------------------------------------------------
+//encoding the basic message with no shift value
+TEST(image_encoder_test, basic_encoding) {
+    // Arrange
+    const string input_image = "test.png";
+    const string output_image = "test_encoded.png";
+    create_test_image(input_image);
 
-    bool encode_result = encode_text_into_image(image_path, text, output_path, 100, shift);
-    ASSERT_TRUE(encode_result);
+    // Act
+    string message = "Hello World";
+    bool result = encode_text_into_image(input_image, message, output_image);
 
-    string decoded_text = decode_text_from_image(output_path, 100, shift);
-    //cout<<"decoded_text is :----------> " << decoded_text ;
-    EXPECT_EQ(decoded_text, text);
+    // Assert
+    EXPECT_TRUE(result);
+    EXPECT_TRUE(filesystem::exists("../" + output_image));
+
+    // Cleanup
+    cleanup_test_files();
+}
+// testing with the empty message
+TEST(image_encoder_test, empty_message) {
+    const string input_image = "test.png";
+    const string output_image = "test_encoded.png";
+    create_test_image(input_image);
+
+    string message = "";
+    bool result = encode_text_into_image(input_image, message, output_image);
+
+    EXPECT_TRUE(result);
+
+    cleanup_test_files();
+}
+//testing with the 1000 character long message
+TEST(image_encoder_test, large_message) {
+    const string input_image = "test.png";
+    const string output_image = "test_encoded.png";
+    create_test_image(input_image);
+
+    string message(1000, 'x');  // 1000 character message
+    bool result = encode_text_into_image(input_image, message, output_image);
+
+    EXPECT_TRUE(result);
+
+    cleanup_test_files();
+}
+// Test with non-existent file
+TEST(image_encoder_test, invalid_image_path) {
+    string message = "Test";
+    bool result = encode_text_into_image("notexist.png", message, "test_encoded.png");
+
+    EXPECT_FALSE(result);
+
+    cleanup_test_files();
+}
+
+//-----------------------------------------------------------------------
+// basic message decode
+TEST(image_decode_test, basic_decoding) {
+    create_test_image("test.png");
+    encode_text_into_image("test.png", "Test message", "test_encoded.png");
+
+    std::string decoded = decode_text_from_image("test_encoded.png");
+    EXPECT_EQ(decoded, "Test message");
+
+    cleanup_test_files();
+}
+// decoding a shifted message (5)
+TEST(image_decode_test, shifted) {
+    create_test_image("test.png");
+    encode_text_into_image("test.png", "Hello", "test_encoded.png", 100, 5);
+
+    std::string decoded = decode_text_from_image("test_encoded.png", 100, 5);
+    EXPECT_EQ(decoded, "Hello");
+
+    cleanup_test_files();
+}
+// Test with wrong image path
+TEST(image_decode_test, wrong_image_path) {
+    string decoded = decode_text_from_image("wrong_image.png");
+    EXPECT_TRUE(decoded.empty());
+}
+/*
+TEST(image_decode_test, not_encoded_image) {        // E R R O R
+    // Setup
+    create_test_image("test.png");
+
+    // Test with image that has no encoded message
+    string decoded = decode_text_from_image("test.png");
+    EXPECT_TRUE(decoded.empty());
+    // Cleanup
+    cleanup_test_files();
 }
 */
-
-
-
-
+//----------------------------------------------------------------
 
 int main() {
     testing::InitGoogleTest();
