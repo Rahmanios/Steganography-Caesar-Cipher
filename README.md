@@ -35,7 +35,7 @@ Least Signification Bit (LSB) method with Caesar Cipher optional encryption.**<b
 ├── **image_encoder.h** &emsp;&emsp;&emsp;&emsp;    # Image encoding functionality <br>
 ├── **1 (6).jpg** &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; # jpg image file <br>
 ├── **boat.png** &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; # jpg image file <br>
-├── **boat_encoded.png** &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; # jpg image file <br>
+├── **boat_encoded.png** &emsp;&emsp;&emsp; # jpg image file <br>
 
 ├── **TEST_CASES** <br>
 │&emsp;├── **test_cases.cpp** &emsp;&emsp;&emsp;&emsp;  # Test cases implementation <br>
